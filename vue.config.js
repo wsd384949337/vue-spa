@@ -9,6 +9,7 @@ module.exports = {
         'element-ui': 'ELEMENT',
         'vuex': 'Vuex',
         'vue-router': 'VueRouter',
+        'axios':'axios'
       }
   },
     pages: {
