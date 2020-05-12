@@ -49,7 +49,7 @@
 </template>
 
 <script>
-
+  import { login, logout, getInfo } from '@/api/user'
 export default {
   name: "Home",
   components: {
@@ -85,6 +85,14 @@ export default {
         this.payType = Number(this.$route.query.payType);
       }
     },
+    login(){
+      login({ username: '1', password: '2' }).then(res => {
+        console.log(res)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    },
    payBtn(){
      //支付按钮
      if(!this.checked){
@@ -113,12 +121,12 @@ export default {
     onBridgeReady() {
       WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
-          "appId": $("#text-appid").val(), //公众号名称，由商户传入     
-          "timeStamp": $("#text-nonceStr").val(), //时间戳，自1970年以来的秒数     
-          "nonceStr": $("#text-nonceStr").val(), //随机串     
+          "appId": $("#text-appid").val(), //公众号名称，由商户传入
+          "timeStamp": $("#text-nonceStr").val(), //时间戳，自1970年以来的秒数
+          "nonceStr": $("#text-nonceStr").val(), //随机串
           "package": "prepay_id=" + $("#text-prepayid").val(),
-          "signType": "MD5", //微信签名方式：     
-          "paySign": $("#text-paySign").val() //微信签名 
+          "signType": "MD5", //微信签名方式：
+          "paySign": $("#text-paySign").val() //微信签名
         },
         function (res) {
           console.log("微信支付返回值:");
@@ -149,7 +157,7 @@ export default {
 };
 </script>
 
-<style scoped>  
+<style scoped>
     .home{
       width:100vw;
     }
@@ -220,7 +228,7 @@ export default {
       background: white;
       margin: 0 auto;
     }
-    .payTypeClass{ 
+    .payTypeClass{
       color:#FFFFFF;
       background:linear-gradient(-57deg,rgba(251,197,188,1),rgba(254,164,164,1));
     }
@@ -288,5 +296,5 @@ export default {
       font-size: 9px;
       color:#CCCCCC;
     }
-    
+
 </style>
